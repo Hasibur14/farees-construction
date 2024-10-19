@@ -19,7 +19,7 @@ const Footer = () => {
               <ul className="mt-2 space-y-2">
                 <li>
                   <a
-                    href="/"
+                    href="/about"
                     className="text-white transition-colors hover:underline text-[14px] duration-300 hover:text-deep-purple-accent-200"
                   >
                     Explore Us
@@ -27,7 +27,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/area-of-activities"
                     className="text-white transition-colors hover:underline text-[14px] duration-300 hover:text-deep-purple-accent-200"
                   >
                     Area Of Activities
@@ -35,7 +35,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/csr"
                     className="text-white transition-colors hover:underline text-[14px] duration-300 hover:text-deep-purple-accent-200"
                   >
                     CSR
@@ -43,7 +43,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/projects"
                     className="text-white transition-colors hover:underline text-[14px] duration-300 hover:text-deep-purple-accent-200"
                   >
                     Projects
@@ -51,7 +51,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/contact"
                     className="text-white transition-colors hover:underline text-[14px] duration-300 hover:text-deep-purple-accent-200"
                   >
                     Contact Us
@@ -146,7 +146,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/"
+                    href="/projets"
                     className="text-white transition-colors hover:underline text-[14px] duration-300 hover:text-deep-purple-accent-200"
                   >
                     Projects
