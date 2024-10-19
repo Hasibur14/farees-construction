@@ -122,7 +122,7 @@ const SubCompany = () => {
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-2xl mx-auto text-center">
             <h2 class="text-2xl md:text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Services We Provide</h2>
-            <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+            <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">We specialize in building high-quality, custom homes with a focus on functionality, aesthetics, and sustainability to meet the unique needs of every homeowner.</p>
         </div>
 
         <div class="grid grid-cols-1 gap-6 mt-12 lg:mt-16 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">

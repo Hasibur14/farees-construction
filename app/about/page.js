@@ -107,7 +107,7 @@ const Page = () => {
       </section>
 
       <div>
-        <section className="py-10 sm:py-16 lg:py-24">
+        <section className="py-10 sm:py-16 lg:py-12">
           <div className="max-w-[1300px] px-4 mx-auto sm:px-6 lg:px-8">
             <div className="grid items-center grid-cols-1 md:gap-y-6 md:grid-cols-2 md:gap-x-20">
               <div className="">
@@ -190,8 +190,8 @@ const Page = () => {
         </section>
       </div>
 
-      <section className="bg-white text-black">
-        <div className="lg:container px-4 md:py-10 pb-5 md:pb-0 lg:mx-auto lg:max-w-[1300px]">
+      <section className="bg-white text-black pb-16">
+        <div className="lg:container px-4  lg:mx-auto lg:max-w-[1300px]">
           <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
             <div className="p-8 space-y-3 border-2 border-blue-400 rounded-xl">
               <span className="inline-block text-black">
@@ -222,7 +222,7 @@ const Page = () => {
               </h1>
 
               <p className="text-gray-500 text-justify md:h-40  ">
-              Our mission is to deliver safe, sustainable, high-quality works and services which uphold our core values like safety, commitment, optimism, quality, trust, integrity, performance, excellence, and discipline
+                Our mission is to deliver safe, sustainable, high-quality works and services which uphold our core values like safety, commitment, optimism, quality, trust, integrity, performance, excellence, and discipline
               </p>
 
               <a
@@ -269,7 +269,7 @@ const Page = () => {
               </h1>
 
               <p className="text-gray-500 text-justify md:h-40">
-              Commitment to build on a tradition of trust through dedication, collaboration, customer satisfaction, and value creation for a green future.
+                Commitment to build on a tradition of trust through dedication, collaboration, customer satisfaction, and value creation for a green future.
               </p>
 
               <a
