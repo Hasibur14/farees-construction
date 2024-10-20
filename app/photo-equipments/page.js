@@ -141,7 +141,7 @@ const PhotoEquipment = () => {
             {visibleImages < equipmentimgs.length && (
               <div className="mt-6 flex justify-center">
                 <button
-                  className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+                  className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700"
                   onClick={showMoreImages}
                 >
                   Show More
