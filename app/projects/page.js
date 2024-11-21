@@ -1,60 +1,42 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Pagination from '../components/pagination/page';
+import axios from 'axios';
 
 
-const ITEMS_PER_PAGE = 6; 
+const ITEMS_PER_PAGE = 6;
 
 const Project = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterLetter, setFilterLetter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
 
-  const projects = [
-   
-    {
-      name: '7.5 km Flexible Road’s Pavement',
-      category: 'Construction',
-      backgroundimg: 'https://i.postimg.cc/tC810NXt/road.jpg',
-    },
-    {
-      name: 'Jolshiri Drainage & Swerege Network',
-      category: 'Construction',
-      backgroundimg: 'https://i.postimg.cc/J02szbj8/D-S.jpg',
-    },
-    {
-      name: 'Construction of Non-Process Building (NPB)',
-      category: 'Construction',
-      backgroundimg: 'https://i.postimg.cc/90M42xR1/NPB.jpg',
-    },
-    {
-      name: 'Raw Water Flow Measurement Chamber',
-      category: 'Construction',
-      backgroundimg: 'https://i.postimg.cc/9FD4NnjQ/constraction1.jpg',
-    },
-    {
-      name: 'UN Vehicle Repair Shed',
-      category: 'Construction',
-      backgroundimg: 'https://i.postimg.cc/26TqPp6V/UN.jpg',
-    },
-    {
-      name: 'Bhasan Char Ashrayan-3, Storm Drain project at Bhasanchar, Noakhali',
-      category: 'Construction',
-      backgroundimg: 'https://i.postimg.cc/gjCG74vx/IMG20200408164436.jpg',
-    },
-    
-    // Add other projects here
-  ];
 
+  // Fetch data on mount
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/recentWorks");
+        setProjects(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getData();
+  }, []);
+
+
+  // DATA FILTER AND SEACRH
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
-      const matchesSearchTerm = project.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const matchesFilterLetter = filterLetter
-        ? project.name.startsWith(filterLetter)
-        : true;
+      // Safeguard for undefined or null project.name
+      const projectName = project.name ? project.name.toLowerCase() : '';
+      const matchesSearchTerm = projectName.includes(searchTerm.toLowerCase());
+      const matchesFilterLetter = filterLetter ? projectName.startsWith(filterLetter) : true;
       return matchesSearchTerm && matchesFilterLetter;
     });
   }, [searchTerm, filterLetter, projects]);
@@ -78,6 +60,10 @@ const Project = () => {
   const handleFilterChange = (event) => {
     setFilterLetter(event.target.value);
   };
+
+  if (loading) {
+    return <div className="text-center py-10">Loading Data...</div>;
+  }
 
   return (
     <div>
@@ -138,7 +124,7 @@ const Project = () => {
         <div className="mx-5 lg:container lg:mx-auto">
           <div>
             <h2 className="text-2xl md:text-4xl text-center font-bold mb-14 hover:bg-opacity-50 pl-3 uppercase">
-              List of projects
+              List of projects 
             </h2>
           </div>
           <div className="max-w-[1400px]  mx-auto sm:px-6 lg:px-8">
