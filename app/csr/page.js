@@ -1,51 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 
-const imgsData = [
-  {
-    id: 1,
-    src: "https://i.postimg.cc/7PSSMXjS/FCL-Brochure-2.jpg",
-    alt: "img 1",
-  },
-  { id: 2, src: "https://i.postimg.cc/httxnnv0/2.jpg", alt: "img 2" },
-  {
-    id: 6,
-    src: "https://i.postimg.cc/7PSSMXjS/FCL-Brochure-2.jpg",
-    alt: "img 6",
-  },
-  {
-    id: 7,
-    src: "https://i.postimg.cc/7PSSMXjS/FCL-Brochure-2.jpg",
-    alt: "img 7",
-  },
-  {
-    id: 8,
-    src: "https://i.postimg.cc/7PSSMXjS/FCL-Brochure-2.jpg",
-    alt: "img 8",
-  },
-  {
-    id: 9,
-    src: "https://i.postimg.cc/7PSSMXjS/FCL-Brochure-2.jpg",
-    alt: "img 9",
-  },
-  {
-    id: 10,
-    src: "https://i.postimg.cc/7PSSMXjS/FCL-Brochure-2.jpg",
-    alt: "img 10",
-  },
-  // Add more imgs if needed
-];
+
 
 const CSR = () => {
-  const [visibleImages, setVisibleImages] = useState(4); // Start by showing 4 images
+  const [visibleImages, setVisibleImages] = useState(4);
+  const [imgsData, setImgsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch data on mount
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/csrs");
+        setImgsData(response.data);
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getData();
+  }, []);
 
   const showMoreImages = () => {
     setVisibleImages((prev) => prev + 4); // Load 4 more images when clicked
   };
 
   const currentimgs = imgsData.slice(0, visibleImages);
+
+  if (loading) {
+    return <div className="text-center py-10">Loading Data...</div>;
+  }
 
   return (
     <div>
@@ -105,14 +93,14 @@ const CSR = () => {
       <section className="py-6">
         <div className="lg:container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 lg:mx-auto lg:max-w-[1300px]">
           {currentimgs?.map((img) => (
-           <div key={img.id} className="border hover:border-red-500 rounded">
-             <img
-              
-              src={img.src}
-              alt={img.alt}
-              className="w-full h-full p-5 rounded-2xl shadow-sm min-h-48 dark:bg-gray-500 aspect-square hover:scale-105 transition duration-300"
-            />
-           </div>
+            <div key={img.id} className="border hover:border-red-500 rounded">
+              <img
+
+                src={img.image}
+                alt="project Image"
+                className="w-full h-full p-5 rounded-2xl shadow-sm min-h-48 dark:bg-gray-500 aspect-square hover:scale-105 transition duration-300"
+              />
+            </div>
           ))}
         </div>
         {visibleImages < imgsData.length && (
