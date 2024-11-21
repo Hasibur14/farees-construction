@@ -1,40 +1,25 @@
-import React from "react";
+"use client"
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const RecentWorks = () => {
-  const projects = [
-    {
-      name: "7.5 km Flexible Road’s Pavement",
-      category: "Construction",
-      backgroundimg: "https://i.postimg.cc/tC810NXt/road.jpg",
-    },
-    {
-      name: "Jolshiri Drainage & Swerege Network",
-      category: "Construction",
-      backgroundimg: "https://i.postimg.cc/J02szbj8/D-S.jpg",
-    },
-    {
-      name: "Construction of Non-Process Building (NPB)",
-      category: "Construction",
-      backgroundimg: "https://i.postimg.cc/90M42xR1/NPB.jpg",
-    },
-    {
-      name: "Raw Water Flow Measurement Chamber",
-      category: "Construction",
-      backgroundimg: "https://i.postimg.cc/9FD4NnjQ/constraction1.jpg",
-    },
-    {
-      name: "UN Vehicle Repair Shed",
-      category: "Construction",
-      backgroundimg: "https://i.postimg.cc/26TqPp6V/UN.jpg",
-    },
-    {
-      name: "Bhasan Char Ashrayan-3, Storm Drain project at Bhasanchar, Noakhali",
-      category: "Construction",
-      backgroundimg: "https://i.postimg.cc/gjCG74vx/IMG20200408164436.jpg",
-    },
+  const [recentWorks, setRecentWorks] = useState([]);
 
-    // Add other projects here
-  ];
+
+  // Fetch data on mount
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/recentWorks");
+        setRecentWorks(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getData();
+  }, []);
+
+  const limitedRecentWorks = recentWorks.slice(0, 6);
 
   return (
     <div className="py-20 container mx-auto max-w-[1300px]" id="recent-works">
@@ -45,7 +30,7 @@ const RecentWorks = () => {
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5">
-          {projects.map((project, index) => (
+          {limitedRecentWorks?.map((project, index) => (
             <div key={index}>
               <div className="relative h-[300px] overflow-hidden rounded-md">
                 <img
