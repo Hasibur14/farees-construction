@@ -10,7 +10,7 @@ const RecentWorks = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/recentWorks");
+        const response = await axios.get("https://farees-backend.vercel.app/recentWorks");
         setRecentWorks(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

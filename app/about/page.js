@@ -19,7 +19,7 @@ const Page = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/home-about");
+        const response = await axios.get("https://farees-backend.vercel.app/home-about");
         setAboutData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -33,7 +33,7 @@ const Page = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/missionVision");
+        const response = await axios.get("https://farees-backend.vercel.app/missionVision");
         setMissionVision(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

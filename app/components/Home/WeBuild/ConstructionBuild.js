@@ -8,7 +8,7 @@ const ConstructionBuild = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/weBuild");
+        const response = await axios.get("https://farees-backend.vercel.app/weBuild");
         setWeBuilds(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

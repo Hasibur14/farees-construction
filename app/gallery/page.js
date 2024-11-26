@@ -1,47 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
-// Dummy gallery imgs
-const galleryimgs = [
-  {
-    id: 1,
-    src: "https://i.postimg.cc/Jh3X8hmt/20210607-174357.jpg",
-    alt: "Nature img 1",
-  },
-  { id: 2, src: "https://i.postimg.cc/W49kzHFP/C-1.jpg", alt: "Nature img 2" },
-  { id: 3, src: "https://i.postimg.cc/fT8xPyCK/11.jpg", alt: "Nature img 3" },
-  {
-    id: 4,
-    src: "https://i.postimg.cc/YCSx2Y0Z/12.jpg",
-    alt: "Landscape img 1",
-  },
-  { id: 5, src: "https://i.postimg.cc/pLP6fmTJ/2.jpg", alt: "Landscape img 2" },
-  {
-    id: 6,
-    src: "https://i.postimg.cc/25bFhY4x/20210525-083210.jpg",
-    alt: "Landscape img 3",
-  },
-  {
-    id: 7,
-    src: "https://i.postimg.cc/Y21RdtTn/20210617-171600.jpg",
-    alt: "Architecture img 1",
-  },
-  {
-    id: 8,
-    src: "https://i.postimg.cc/LsckVWDF/3.jpg",
-    alt: "Architecture img 2",
-  },
-  {
-    id: 9,
-    src: "https://i.postimg.cc/X748hTbV/a-7.jpg",
-    alt: "Architecture img 3",
-  },
-  { id: 10, src: "https://i.postimg.cc/httxnnv0/2.jpg", alt: "Nature img 1" },
-];
+import axios from "axios";
 
 const GalleryPage = () => {
+  const [gallerys, setGallerys] = useState([]);
+
+  // Fetch data on mount
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get("https://farees-backend.vercel.app/gallery");
+        setGallerys(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error("Failed to fetch data");
+      }
+    };
+    getData();
+  }, []);
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <section className="relative bg-gray-800 text-white">
@@ -99,11 +78,11 @@ const GalleryPage = () => {
 
       <main className="lg:container lg:mx-auto lg:max-w-[1300px] px-4 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 md:gap-8">
-          {galleryimgs?.map((img) => (
+          {gallerys?.map((img) => (
             <div key={img.id} className="relative group cursor-pointer">
               <img
-                src={img.src}
-                alt={img.alt}
+                src={img.galleryImage}
+                alt="fcl gallery"
                 width={800}
                 height={600}
                 className="w-full h-60 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"

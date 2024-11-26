@@ -19,7 +19,7 @@ const Project = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/recentWorks");
+        const response = await axios.get("https://farees-backend.vercel.app/recentWorks");
         setProjects(response.data);
         setLoading(false);
       } catch (error) {

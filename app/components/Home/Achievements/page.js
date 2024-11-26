@@ -9,7 +9,7 @@ const Achievements = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/achive");
+        const response = await axios.get("https://farees-backend.vercel.app/achive");
         setAchievements(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

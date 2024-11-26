@@ -15,7 +15,7 @@ const CSR = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/csrs");
+        const response = await axios.get("https://farees-backend.vercel.app/csrs");
         setImgsData(response.data);
         setLoading(false)
       } catch (error) {

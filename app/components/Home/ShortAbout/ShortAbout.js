@@ -9,7 +9,7 @@ const ShortAbout = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/home-about");
+        const response = await axios.get("https://farees-backend.vercel.app/home-about");
         setAboutData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

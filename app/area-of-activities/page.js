@@ -15,7 +15,7 @@ const Activities = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/areaActivites");
+        const response = await axios.get("https://farees-backend.vercel.app/areaActivites");
         setActivities(response.data);
         setLoading(false); 
       } catch (error) {
