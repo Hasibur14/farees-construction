@@ -2,8 +2,12 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
+
 
 const Achievements = () => {
+
+  const [loading, setLoading] = useState(true);
   const [achievements, setAchievements] = useState([]);
 
   useEffect(() => {
@@ -13,14 +17,17 @@ const Achievements = () => {
         setAchievements(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-
+      } finally {
+        setLoading(false);
       }
     };
     getData();
   }, []);
 
 
-  console.log(achievements)
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="bg-black text-white py-14 lg:py-32">

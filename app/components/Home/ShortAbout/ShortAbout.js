@@ -2,8 +2,10 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const ShortAbout = () => {
+  const [loading, setLoading] = useState(true);
   const [aboutData, setAboutData] = useState([]);
 
   useEffect(() => {
@@ -14,11 +16,18 @@ const ShortAbout = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
         toast.error("Failed to fetch data");
+      } finally {
+        setLoading(false);
       }
     };
     getData();
   }, []);
 
+
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section class="py-10 bg-white sm:py-16 lg:py-24">

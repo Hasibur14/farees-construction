@@ -1,8 +1,11 @@
 "use client"
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const RecentWorks = () => {
+
+  const [loading, setLoading] = useState(true);
   const [recentWorks, setRecentWorks] = useState([]);
 
 
@@ -14,12 +17,18 @@ const RecentWorks = () => {
         setRecentWorks(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     getData();
   }, []);
 
   const limitedRecentWorks = recentWorks.slice(0, 6);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="py-20 container mx-auto max-w-[1300px]" id="recent-works">

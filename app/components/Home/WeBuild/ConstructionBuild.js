@@ -1,9 +1,12 @@
 "use client"
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const ConstructionBuild = () => {
+  const [loading, setLoading] = useState(true);
   const [weBuilds, setWeBuilds] = useState([]);
+
 
   useEffect(() => {
     const getData = async () => {
@@ -12,11 +15,17 @@ const ConstructionBuild = () => {
         setWeBuilds(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     getData();
   }, []);
 
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="bg-slate-50">
