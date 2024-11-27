@@ -4,6 +4,7 @@ import axios from "axios";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const Activities = () => {
 
@@ -17,7 +18,7 @@ const Activities = () => {
       try {
         const response = await axios.get("https://farees-backend.vercel.app/areaActivites");
         setActivities(response.data);
-        setLoading(false); 
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -34,7 +35,9 @@ const Activities = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-10">Loading Data...</div>;
+    return <div>
+      <LoadingSpinner />
+    </div>;
   }
 
   return (

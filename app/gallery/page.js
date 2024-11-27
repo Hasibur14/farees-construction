@@ -3,8 +3,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const GalleryPage = () => {
+
+  const [loading, setLoading] = useState(true);
   const [gallerys, setGallerys] = useState([]);
 
   // Fetch data on mount
@@ -12,14 +15,20 @@ const GalleryPage = () => {
     const getData = async () => {
       try {
         const response = await axios.get("https://farees-backend.vercel.app/gallery");
+        setLoading(false)
         setGallerys(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Failed to fetch data");
       }
     };
     getData();
   }, []);
+
+
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen">

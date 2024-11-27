@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Pagination from '../components/pagination/page';
 import axios from 'axios';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 
 const ITEMS_PER_PAGE = 6;
@@ -62,7 +63,9 @@ const Project = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-10">Loading Data...</div>;
+    return <div>
+      <LoadingSpinner />
+    </div>;
   }
 
   return (
@@ -124,7 +127,7 @@ const Project = () => {
         <div className="mx-5 lg:container lg:mx-auto">
           <div>
             <h2 className="text-2xl md:text-4xl text-center font-bold mb-14 hover:bg-opacity-50 pl-3 uppercase">
-              List of projects 
+              List of projects
             </h2>
           </div>
           <div className="max-w-[1400px]  mx-auto sm:px-6 lg:px-8">

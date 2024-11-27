@@ -1,33 +1,45 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import axios from 'axios';
 
-const people = [
-  { name: "Juliet Smith", role: "Team Leader", imgSrc: "https://img.freepik.com/free-photo/businesspeople-office-meeting_23-2148908969.jpg", linkedin: "https://linkedin.com", description: "This is all about Juliet." },
-  { name: "Andrew Davis", role: "Analyst", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about Andrew." },
-  { name: "John Doe", role: "Developer", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about John." },
-  { name: "John Doe", role: "Developer", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about John." },
-  { name: "John Doe", role: "Developer", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about John." },
-  { name: "John Doe", role: "Developer", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about John." },
-  { name: "John Doe", role: "Developer", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about John." },
-  { name: "John Doe", role: "Developer", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about John." },
-  { name: "John Doe", role: "Developer", imgSrc: "https://img.freepik.com/free-photo/portrait-adult-male-smiling_23-2148729648.jpg", linkedin: "https://linkedin.com", description: "This is all about John." },
-  // ... more people data
-];
 
 const ITEMS_PER_PAGE = 6;
 
 const TeamSection = () => {
+
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  
+  const [people, setPeople] = useState([]);
+
+
+  // Fetch data on mount
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get("https://farees-backend.vercel.app/team");
+        setLoading(false)
+        setPeople(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getData();
+  }, []);
+
   const totalPages = Math.ceil(people.length / ITEMS_PER_PAGE);
-  
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentPeople = people.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="bg-white py-4 sm:py-6">

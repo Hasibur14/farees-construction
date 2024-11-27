@@ -1,6 +1,8 @@
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner"
+
 const page = () => {
   return (
-    <div>page</div>
+    <div></div>
   )
 }
 

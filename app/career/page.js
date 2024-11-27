@@ -3,11 +3,13 @@ import Link from "next/link";
 import img1 from "@/public/assets/banner/constraction.jpeg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 
 
 export default function CareerPage() {
 
+  const [loading, setLoading] = useState(true);
   const [jobOpenings, setJobOpenings] = useState([]);
 
   // Fetch data on mount
@@ -15,6 +17,7 @@ export default function CareerPage() {
     const getData = async () => {
       try {
         const response = await axios.get("https://farees-backend.vercel.app/jobs");
+        setLoading(false)
         setJobOpenings(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -24,8 +27,13 @@ export default function CareerPage() {
   }, []);
 
 
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
-    <div className="mt-24">
+    <div>
       {/* Hero Section */}
       <section className="relative bg-gray-800 text-white">
         <div className="relative">
@@ -72,7 +80,7 @@ export default function CareerPage() {
         <div className="container mx-auto px-6 lg:px-8">
           <div className="flex justify-between mb-20">
             <h2 className="text-2xl md:text-4xl font-bold text-center">
-              Current Job Openings ({jobOpenings.length})
+              Current Job Openings : (0{jobOpenings.length})
             </h2>
 
           </div>
@@ -92,8 +100,8 @@ export default function CareerPage() {
                     {job.
                       employmentType}
                   </span>
-                  <span className="inline-block bg-yellow-200 text-yellow-800 text-sm font-medium px-2.5 py-0.5 rounded-full">
-                    {job.startDate
+                  <span className="inline-block bg-yellow-200 text-yellow-700 text-sm font-medium px-2.5 py-0.5 rounded-full">
+                    Start: Date  {job.startDate
                     }
                   </span>
                 </div>

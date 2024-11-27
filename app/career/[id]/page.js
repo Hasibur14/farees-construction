@@ -1,34 +1,40 @@
 "use client";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import LoadingSpinner from '@/app/components/LoadingSpinner/LoadingSpinner';
 
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+const JobDetailsPage = ({ params }) => {
+    console.log(params.id, "job details");
 
-const JobDetailsPage = ({ jobId }) => {
-  const [job, setJob] = useState(null);
-  const [loading, setLoading] = useState(true);
+    const [job, setJob] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(`https://farees-backend.vercel.app/jobs/${jobId}`);
-        setJob(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-    getData();
-  }, [jobId]);
+    // Fetch data on mount
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await axios.get(`https://farees-backend.vercel.app/jobs/${params.id}`);
+                setJob(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                toast.error("Failed to fetch data");
+                setLoading(false);
+            }
+        };
+        getData();
+    }, [params.id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!job) return <div>Job not found</div>;
+    // Display loading state while data is being fetched
+    if (loading) return <div> <LoadingSpinner/> </div>;
 
+    // Display error message if job data is not found
+    if (!job) return <div>Job not found</div>;
 
 
 
     return (
-        <div className="bg-gray-100 min-h-screen mt-24">
+        <div className="bg-gray-100 min-h-screen">
             {/* Job Details Section */}
             <main className="py-12">
                 <div className="container mx-auto px-4 lg:px-8">

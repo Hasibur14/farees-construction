@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 
 
@@ -32,7 +33,7 @@ const CSR = () => {
   const currentimgs = imgsData.slice(0, visibleImages);
 
   if (loading) {
-    return <div className="text-center py-10">Loading Data...</div>;
+    return <div> <LoadingSpinner /> </div>;
   }
 
   return (

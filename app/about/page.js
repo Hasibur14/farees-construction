@@ -7,10 +7,12 @@ import { IoCompassOutline } from "react-icons/io5";
 import Link from "next/link";
 import axios from "axios";
 import CertificatesInfo from "./Certificates";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 
 const Page = () => {
- 
+
+  const [loading, setLoading] = useState(true);
   const [missionVision, setMissionVision] = useState([]);
   const [aboutData, setAboutData] = useState([]);
 
@@ -23,8 +25,12 @@ const Page = () => {
         setAboutData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
+
     };
+
     getData();
   }, []);
 
@@ -37,10 +43,17 @@ const Page = () => {
         setMissionVision(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     getData();
   }, []);
+
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
 
 
